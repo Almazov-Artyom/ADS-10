@@ -44,7 +44,7 @@ class Tree {
         explicit Tree(std::vector<char> vec): root(nullptr) {
         root = create(root, vec);
         std::vector<char> b;
-        Perm(root, b);
+        Perm(root, &b);
     }
     std::vector<char> perm(int n) const {
         if (vec.size() < n)
