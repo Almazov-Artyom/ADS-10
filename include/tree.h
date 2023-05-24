@@ -26,25 +26,25 @@ class Tree {
             return root;
         return root;
     }
-    std::vector<char> Perm(Node* root, std::vector<char>& a) {
+    std::vector<char> Perm(Node* root, std::vector<char>* a) {
         for (int i = 0; i < root->ptr.size(); ++i) {
-            a.push_back(root->ptr[i]->c);
+            a->push_back(root->ptr[i]->c);
             if (root->ptr[i]->ptr.empty())
-                return a;
+                return *a;
             Perm(root->ptr[i], a);
-            if (a.size() != 1)
-                vec.push_back(a);
-            for (int g = 0; g < a.size(); ++g)
-                a.pop_back();
+            if (a->size() != 1)
+                vec.push_back(*a);
+            for (int g = 0; g < a->size(); ++g)
+                a->pop_back();
         }
-        return a;
+        return *a;
     }
 
  public:
-    Tree(std::vector<char> vec): root(nullptr) {
+        explicit Tree(std::vector<char> vec): root(nullptr) {
         root = create(root, vec);
         std::vector<char> b;
-        Perm(root,b);
+        Perm(root, b);
     }
     std::vector<char> perm(int n) const {
         if (vec.size() < n)
